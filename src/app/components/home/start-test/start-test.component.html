@@ -1,0 +1,30 @@
+<form role="form" [formGroup]="examForm" (ngSubmit)="submitTest()">
+    <div class="exam-page">
+        <div class="row" style="display: flex;">
+            <h4 class="instruction-heading">Online Test</h4>
+            <div class="Timer">
+                Time Left: <countdown #cd [config]="{leftTime: 1800}" (event)="handleEvent($event)"></countdown>
+            </div>
+        </div>
+        <div class="question-list">
+            <div *ngFor="let qData of questions; let i = index;"><br>
+                <b>{{qData.qId}}.</b> &nbsp; {{qData.qName}}<br>
+                <div *ngFor="let ansData of questions[i].answers; let j = index;">
+                    <input type="radio" name="answers_{{questions[i].qId}}"
+                        (change)="selectedAnswer(questions[i],ansData)"> &nbsp; {{ansData.option}} &nbsp;
+                    {{ansData.aName}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border border-light">
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Submit Test</button>
+        </div>
+    </div>
+</form>
+<div class="fixtimer">
+    Time Left: <b>
+        <countdown #cd [config]="{leftTime: 1800}" (event)="handleEvent($event)"></countdown>
+    </b>
+</div>

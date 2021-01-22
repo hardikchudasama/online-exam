@@ -1,0 +1,29 @@
+ul,
+li {
+    list-style: none;
+    // padding-top: 7px;
+    a {
+        padding: 10px;
+        color: white;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+.topbar {
+    background: #404040;
+    width: 100%;
+    height: 50px;
+}
+.user-info {
+    text-align: right;
+    color: white;
+    padding-top: 14px;
+    padding-right: 15px;
+}
+.logo {
+    height: 50px !important;
+    width: 200px !important;
+}

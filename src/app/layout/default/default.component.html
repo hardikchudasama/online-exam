@@ -1,0 +1,20 @@
+<div class="topbar">
+    <div class="row">
+        <div class="col-md-6">
+            <ul>
+                <li>
+                    <img src="../../../assets/datasoslogo.png" class="logo">
+                    <a routerLink='/home/admin' *ngIf='loginUser.role === "Admin"'>Admin</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <div class="user-info">
+                <b style="padding-right:15px">{{loginUser.role}}: {{loginUser.firstName}} {{loginUser.lastName}}</b>
+                <b (click)='logout()' style="cursor: pointer;">Logout</b><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
