@@ -1,4 +1,4 @@
-<form role="form" [formGroup]="examForm" (ngSubmit)="submitTest()">
+<div class="row">
     <div class="exam-page">
         <div class="row" style="display: flex;">
             <h4 class="instruction-heading">Online Test</h4>
@@ -6,25 +6,49 @@
                 Time Left: <countdown #cd [config]="{leftTime: 1800}" (event)="handleEvent($event)"></countdown>
             </div>
         </div>
-        <div class="question-list">
-            <div *ngFor="let qData of questions; let i = index;"><br>
-                <b>{{qData.qId}}.</b> &nbsp; {{qData.qName}}<br>
-                <div *ngFor="let ansData of questions[i].answers; let j = index;">
-                    <input type="radio" name="answers_{{questions[i].qId}}"
-                        (change)="selectedAnswer(questions[i],ansData)"> &nbsp; {{ansData.option}} &nbsp;
-                    {{ansData.aName}}
+    </div>
+    <div class="col-md-9" style="padding-left: 50px;">
+        <form role="form" [formGroup]="examForm" (ngSubmit)="submitTest()">
+            <div class="question-list">
+                <div *ngFor="let qData of questions; let i = index;"><br>
+                    <div><b>{{qData.qId}}.</b> &nbsp; <span #formRow>{{qData.qName}}</span></div><br>
+                    <div *ngFor="let ansData of questions[i].answers; let j = index;">
+                        <input type="radio" name="answers_{{questions[i].qId}}"
+                            (change)="selectedAnswer(questions[i],ansData)"> &nbsp; {{ansData.option}} &nbsp;
+                        {{ansData.aName}}
+                    </div>
+                    <div *ngFor="let ansData of questions[i].answers; let j = index;">
+                        <div class="clear_answer" style="color: grey;cursor: pointer;"
+                            *ngIf='ansData.isSelected === true' (click)='clearAnswer(qData)'>
+                            Clear Answer
+                        </div>
+                    </div>
+
+                </div>
+                <div class="border border-light">
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">Submit Test</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3">
+        <div class="questionsIndex">
+            <label class="qiHeading">Questions Index</label>
+            <div *ngFor='let qIndex of questionsindexData; let i = index;'>
+                <div class="abc">
+                    <div class="indexItems" [ngClass]="{'highlight': qIndex.isSelectedIndex === true}"
+                        (click)="focusOnInput()">
+                        {{qIndex.id}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="border border-light">
-        <div class="text-center">
-            <button class="btn btn-primary" type="submit">Submit Test</button>
-        </div>
+    <div class="fixtimer">
+        Time Left: <b>
+            <countdown #cd [config]="{leftTime: 1800}" (event)="handleEvent($event)"></countdown>
+        </b>
     </div>
-</form>
-<div class="fixtimer">
-    Time Left: <b>
-        <countdown #cd [config]="{leftTime: 1800}" (event)="handleEvent($event)"></countdown>
-    </b>
 </div>

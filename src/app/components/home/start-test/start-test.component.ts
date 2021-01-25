@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
@@ -10,7 +10,53 @@ import { element } from 'protractor';
   styleUrls: ['./start-test.component.scss']
 })
 export class StartTestComponent implements OnInit {
+  @ViewChildren('formRow') rows: ElementRef;
+
   examForm: FormGroup;
+  questionsindexData: any = [{
+    id: 1,
+    isSelectedIndex: false
+  },
+  {
+    id: 2,
+    isSelectedIndex: false
+  },
+  {
+    id: 3,
+    isSelectedIndex: false
+  },
+  {
+    id: 4,
+    isSelectedIndex: false
+  },
+  {
+    id: 5,
+    isSelectedIndex: false
+  },
+  {
+    id: 6,
+    isSelectedIndex: false
+  },
+  {
+    id: 7,
+    isSelectedIndex: false
+  },
+  {
+    id: 8,
+    isSelectedIndex: false
+  },
+  {
+    id: 9,
+    isSelectedIndex: false
+  },
+  {
+    id: 10,
+    isSelectedIndex: false
+  }]
+
+
+
+
   questions: any = [
     {
       qId: 1,
@@ -368,6 +414,7 @@ export class StartTestComponent implements OnInit {
   unAnsweredQuestions: number;
   questionArr: any = [];
   attendedAnswer: number;
+  selectedIndex: any;
   constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -384,6 +431,7 @@ export class StartTestComponent implements OnInit {
   }
 
   selectedAnswer(questionData, ansData) {
+    this.questionsindexData.map(data => data.id === questionData.qId ? data.isSelectedIndex = true : '');
     this.questions.filter(d1 => d1.qId === questionData.qId)[0].answers.filter(d2 => d2.aId === ansData.aId ? d2.isSelected = true : d2.isSelected = false);
   }
 
@@ -401,4 +449,11 @@ export class StartTestComponent implements OnInit {
     }
   }
 
+  focusOnInput() {
+    this.rows['last']['nativeElement'].focus();
+  }
+
+  clearAnswer(questionData) {
+    console.log('questionData', questionData);
+  }
 }
