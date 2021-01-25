@@ -454,6 +454,11 @@ export class StartTestComponent implements OnInit {
   }
 
   clearAnswer(questionData) {
-    console.log('questionData', questionData);
+    console.log('++', questionData);
+    console.log('++', this.questionsindexData);
+
+    return [questionData.answers.map(qdata => qdata.isSelected === true ? qdata.isSelected = false : qdata.isSelected = false),
+    this.questionsindexData.filter(data => (data.id === questionData.qId && data.isSelectedIndex === true) ? data.isSelectedIndex = false : '')];
+
   }
 }

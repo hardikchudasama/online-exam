@@ -25,6 +25,7 @@
     position: fixed;
     width: 13%;
     border: 1px solid #d2cdcd;
+    margin-top: 20px;
 }
 
 .fixtimer {
@@ -65,4 +66,34 @@
 
 .highlight {
     background: green;
+}
+
+.mainQuestion {
+    border: 1px solid #e2e2e2;
+}
+
+.questionLable {
+    padding: 15px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.questionHeading {
+    font-size: 18px;
+    padding: 15px;
+    letter-spacing: 0.3px;
+    text-align: justify;
+}
+
+.questionOptions {
+    padding: 15px;
+    border: 1px solid #e2e2e2;
+    margin: 0px 15px 15px 15px !important;
+}
+
+.clear_answer {
+    color: grey;
+    cursor: pointer;
+    margin-left: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }

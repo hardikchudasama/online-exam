@@ -11,19 +11,24 @@
         <form role="form" [formGroup]="examForm" (ngSubmit)="submitTest()">
             <div class="question-list">
                 <div *ngFor="let qData of questions; let i = index;"><br>
-                    <div><b>{{qData.qId}}.</b> &nbsp; <span #formRow>{{qData.qName}}</span></div><br>
-                    <div *ngFor="let ansData of questions[i].answers; let j = index;">
-                        <input type="radio" name="answers_{{questions[i].qId}}"
-                            (change)="selectedAnswer(questions[i],ansData)"> &nbsp; {{ansData.option}} &nbsp;
-                        {{ansData.aName}}
-                    </div>
-                    <div *ngFor="let ansData of questions[i].answers; let j = index;">
-                        <div class="clear_answer" style="color: grey;cursor: pointer;"
-                            *ngIf='ansData.isSelected === true' (click)='clearAnswer(qData)'>
-                            Clear Answer
+                    <div class="mainQuestion">
+                        <div class="questionLable">QUESTION {{qData.qId}}</div>
+                        <div class="questionHeading">{{qData.qName}}</div>
+                        <div *ngFor="let ansData of questions[i].answers; let j = index;">
+                            <div class="questionOptions">
+                                <input type="radio" name="answers_{{questions[i].qId}}"
+                                    (change)="selectedAnswer(questions[i],ansData)"
+                                    [checked]='ansData.isSelected === true'>
+                                &nbsp; {{ansData.option}} &nbsp;
+                                {{ansData.aName}}
+                            </div>
+                        </div>
+                        <div *ngFor="let ansData of questions[i].answers; let j = index;">
+                            <div class="clear_answer" *ngIf='ansData.isSelected === true' (click)='clearAnswer(qData)'>
+                                Clear Answer
+                            </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="border border-light">
                     <div class="text-center">
