@@ -17,3 +17,72 @@
 .check-answer {
     color: #5eac1a;
 }
+
+.mainQuestion {
+    border: 1px solid #e2e2e2;
+    margin-bottom: 15px;
+    margin-top: 30px;
+}
+
+.questionLable {
+    padding: 15px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.questionHeading {
+    font-size: 18px;
+    padding: 15px;
+    letter-spacing: 0.3px;
+    text-align: justify;
+}
+
+.questionOptions {
+    padding: 15px;
+    border: 1px solid #e2e2e2;
+    margin: 0px 15px 15px 15px !important;
+}
+
+.correctAnswers {
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.questionsIndex {
+    position: fixed;
+    width: 13%;
+    border: 1px solid #d2cdcd;
+    margin-top: 10%;
+}
+
+.qiHeading {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    border-bottom: 1px solid #d2cdcd;
+    width: 100%;
+    margin-left: 0px !important;
+    text-align: center;
+}
+
+.indexItems {
+    color: #ffffff;
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    background-color: #dedede;
+    line-height: 30px;
+    font-size: 16px;
+    padding: 0px;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+}
+
+.highlight {
+    background: green;
+}
+
+
+.highlightRed {
+    background: red;
+}

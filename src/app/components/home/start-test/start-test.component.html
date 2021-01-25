@@ -42,11 +42,8 @@
         <div class="questionsIndex">
             <label class="qiHeading">Questions Index</label>
             <div *ngFor='let qIndex of questionsindexData; let i = index;'>
-                <div class="abc">
-                    <div class="indexItems" [ngClass]="{'highlight': qIndex.isSelectedIndex === true}"
-                        (click)="focusOnInput()">
-                        {{qIndex.id}}
-                    </div>
+                <div class="indexItems" [ngClass]="{'highlight': qIndex.isSelectedIndex === true}">
+                    {{qIndex.id}}
                 </div>
             </div>
         </div>

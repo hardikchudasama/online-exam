@@ -1,5 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
@@ -15,43 +16,53 @@ export class StartTestComponent implements OnInit {
   examForm: FormGroup;
   questionsindexData: any = [{
     id: 1,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 2,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 3,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 4,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 5,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 6,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 7,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 8,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 9,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   },
   {
     id: 10,
-    isSelectedIndex: false
+    isSelectedIndex: false,
+    isSelectedAns: null
   }]
 
 
@@ -415,6 +426,7 @@ export class StartTestComponent implements OnInit {
   questionArr: any = [];
   attendedAnswer: number;
   selectedIndex: any;
+  htmlSnippet: string;
   constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -437,7 +449,9 @@ export class StartTestComponent implements OnInit {
 
   submitTest() {
     localStorage.setItem("formData", JSON.stringify(this.questions));
+    localStorage.setItem("questionIndex", JSON.stringify(this.questionsindexData));
     this.questionArr = JSON.parse(localStorage.getItem('formData'));
+
     if (this.questionArr && this.questionArr.length) {
       this.attendedAnswer = this.questionArr.map(data => data.answers.filter(data2 => data2.isSelected === true)).filter(data => data.length).length;
       this.unAnsweredQuestions = this.questionArr.length - this.attendedAnswer;
@@ -449,16 +463,9 @@ export class StartTestComponent implements OnInit {
     }
   }
 
-  focusOnInput() {
-    this.rows['last']['nativeElement'].focus();
-  }
-
   clearAnswer(questionData) {
-    console.log('++', questionData);
-    console.log('++', this.questionsindexData);
-
     return [questionData.answers.map(qdata => qdata.isSelected === true ? qdata.isSelected = false : qdata.isSelected = false),
     this.questionsindexData.filter(data => (data.id === questionData.qId && data.isSelectedIndex === true) ? data.isSelectedIndex = false : '')];
-
   }
+
 }

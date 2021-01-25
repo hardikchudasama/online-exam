@@ -1,42 +1,62 @@
-<div class="resultPage">
-    <div class="row" style="text-align: center;background-color: rgb(221, 248, 194);font-size: 14px;
-    font-weight: bold;margin: 0 !important;">Marks : {{this.counter}}/{{this.totalQuestons}}</div>
-    <div class="row">
-        <div class="col-md-10">Total number of questions</div>
-        <div class="col-md-1">:</div>
-        <div class="col-md-1"><b>{{this.totalQuestons}}</b></div>
-    </div>
-    <div class="row">
-        <div class="col-md-10">Number of answered questions</div>
-        <div class="col-md-1">:</div>
-        <div class="col-md-1"><b>{{answeredQuestions.length}}</b></div>
-    </div>
-    <div class="row">
-        <div class="col-md-10">Number of unanswered questions</div>
-        <div class="col-md-1">:</div>
-        <div class="col-md-1"><b>{{unAnsweredQuestions ? unAnsweredQuestions : 0 }}</b></div>
-    </div>
-    <div class="testreview" *ngIf='questions && questions.length'>
-        Test Review : View answers and explanation for this test.
-    </div>
-    <div class="exam-page">
-        <div *ngFor="let qData of questions; let i = index;"><br>
-            <b>{{qData.qId}}.</b> &nbsp; {{qData.qName}}<br>
-            <div *ngFor="let ansData of questions[i].answers; let j = index;">
-                <input type="radio" name="answers_{{questions[i].qId}}" [checked]='ansData.isSelected' disabled>
-                &nbsp; {{ansData.option}} &nbsp; {{ansData.aName}}
-                <div *ngIf='ansData.isSelected === true &&  ansData.correctAns === true' style="display: contents;">
-                    <img src="./../../../../assets/accept.png" style="margin-left: 8px;">
+<div class="row">
+    <div class="col-md-9">
+        <div class="resultPage">
+            <div class="row" style="text-align: center;background-color: rgb(221, 248, 194);font-size: 14px;
+            font-weight: bold;margin: 0 !important;">Marks : {{this.counter}}/{{this.totalQuestons}}</div>
+            <div class="row">
+                <div class="col-md-10">Total number of questions</div>
+                <div class="col-md-1">:</div>
+                <div class="col-md-1"><b>{{this.totalQuestons}}</b></div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">Number of answered questions</div>
+                <div class="col-md-1">:</div>
+                <div class="col-md-1"><b>{{answeredQuestions.length}}</b></div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">Number of unanswered questions</div>
+                <div class="col-md-1">:</div>
+                <div class="col-md-1"><b>{{unAnsweredQuestions ? unAnsweredQuestions : 0 }}</b></div>
+            </div>
+            <div class="testreview" *ngIf='questions && questions.length'>
+                Test Review : View answers and explanation for this test.
+            </div>
+        </div>
+        <div *ngFor="let qData of questions; let i = index;">
+            <div class="mainQuestion">
+                <div class="questionLable">QUESTION {{qData.qId}}</div>
+                <div class="questionHeading">{{qData.qName}}</div>
+                <div *ngFor="let ansData of questions[i].answers; let j = index;">
+                    <div class="questionOptions">
+                        <input type="radio" name="answers_{{questions[i].qId}}" [checked]='ansData.isSelected' disabled>
+                        &nbsp; {{ansData.option}} &nbsp; {{ansData.aName}}
+                        <div *ngIf='ansData.isSelected === true &&  ansData.correctAns === true'
+                            style="display: contents;">
+                            <img src="./../../../../assets/accept.png" style="margin-left: 8px;">
+                        </div>
+                        <div *ngIf='ansData.isSelected === true &&  ansData.correctAns === false'
+                            style="display: contents;">
+                            <img src="./../../../../assets/wrong.gif" style="margin-left: 8px;">
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf='ansData.isSelected === true &&  ansData.correctAns === false' style="display: contents;">
-                    <img src="./../../../../assets/wrong.gif" style="margin-left: 8px;">
+                <div class="correctAnswers">
+                    <span class="check-answer">Your Answer:</span> option
+                    <span style="color:grey;font-weight:bold">{{getAnswer(questions[i].answers)}}</span><br>
+                    <span class="check-answer">Correct Answer:</span> option
+                    <span><b>{{getCorrectAnswer(questions[i].answers)}}</b></span>
                 </div>
             </div>
-            <div class="correctAnswers">
-                <span class="check-answer">Your Answer:</span> option
-                <span style="color:grey;font-weight:bold">{{getAnswer(questions[i].answers)}}</span><br>
-                <span class="check-answer">Correct Answer:</span> option
-                <span><b>{{getCorrectAnswer(questions[i].answers)}}</b></span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="questionsIndex">
+            <label class="qiHeading">Questions Index</label>
+            <div *ngFor='let qIndex of questionsindexData; let i = index;'>
+                <div class="indexItems" [ngClass]="{'highlight': qIndex.isSelectedIndex === true && qIndex.isSelectedAns === true,
+                'highlightRed': qIndex.isSelectedIndex === true && qIndex.isSelectedAns === false}">
+                    {{qIndex.id}}
+                </div>
             </div>
         </div>
     </div>

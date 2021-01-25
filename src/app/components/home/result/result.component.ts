@@ -12,11 +12,14 @@ export class ResultComponent implements OnInit {
   answeredQuestions: any = [];
   unAnsweredQuestions: number;
   counter: any = 0;
+  questionsindexData: any = [];
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.questions = JSON.parse(localStorage.getItem('formData'));
+    this.questionsindexData = JSON.parse(localStorage.getItem('questionIndex'));
+    console.log('this.questionsindexData', this.questionsindexData);
     this.totalQuestons = this.questions && this.questions.length ? this.questions.length : 0;
     if (this.questions && this.questions.length) {
       this.questions.map(qData => qData.answers.map(adata => (adata.isSelected === true ? this.answeredQuestions.push(adata) : [])));
@@ -24,6 +27,7 @@ export class ResultComponent implements OnInit {
       this.questions.map(data1 => data1.answers.map(data2 => (data2.isSelected === true && data2.correctAns === true ? (this.counter = this.counter + 1) : 0)))
     }
     localStorage.removeItem('formData');
+    localStorage.removeItem('questionIndex');
     if (!this.questions) {
       this.router.navigate(['/home']);
     }
