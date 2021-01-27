@@ -448,6 +448,25 @@ export class StartTestComponent implements OnInit {
   }
 
   submitTest() {
+    for (let i = 0; i < this.questions.length; i++) {
+      for (let j = 0; j < this.questions[i].answers.length; j++) {
+        if (this.questions[i].answers[j].isSelected === true && this.questions[i].answers[j].correctAns === true) {
+          for (let k = 0; k < this.questionsindexData.length; k++) {
+            if (this.questionsindexData[k].id === this.questions[i].qId) {
+              this.questionsindexData[k].isSelectedAns = true;
+            }
+          }
+        }
+        if (this.questions[i].answers[j].isSelected === true && this.questions[i].answers[j].correctAns === false) {
+          for (let k = 0; k < this.questionsindexData.length; k++) {
+            if (this.questionsindexData[k].id === this.questions[i].qId) {
+              this.questionsindexData[k].isSelectedAns = false;
+            }
+          }
+        }
+      }
+    }
+
     localStorage.setItem("formData", JSON.stringify(this.questions));
     localStorage.setItem("questionIndex", JSON.stringify(this.questionsindexData));
     this.questionArr = JSON.parse(localStorage.getItem('formData'));

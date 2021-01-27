@@ -19,7 +19,6 @@ export class ResultComponent implements OnInit {
   ngOnInit(): void {
     this.questions = JSON.parse(localStorage.getItem('formData'));
     this.questionsindexData = JSON.parse(localStorage.getItem('questionIndex'));
-    console.log('this.questionsindexData', this.questionsindexData);
     this.totalQuestons = this.questions && this.questions.length ? this.questions.length : 0;
     if (this.questions && this.questions.length) {
       this.questions.map(qData => qData.answers.map(adata => (adata.isSelected === true ? this.answeredQuestions.push(adata) : [])));
