@@ -12,7 +12,7 @@
             <div class="question-list">
                 <div *ngFor="let qData of questions; let i = index;"><br>
                     <div class="mainQuestion">
-                        <div class="questionLable">QUESTION {{qData.qId}}</div>
+                        <div class="questionLable" #qlable tabindex="-1">QUESTION {{qData.qId}}</div>
                         <div class="questionHeading">{{qData.qName}}</div>
                         <div *ngFor="let ansData of questions[i].answers; let j = index;">
                             <div class="questionOptions">
@@ -42,7 +42,8 @@
         <div class="questionsIndex">
             <label class="qiHeading">Questions Index</label>
             <div *ngFor='let qIndex of questionsindexData; let i = index;'>
-                <div class="indexItems" [ngClass]="{'highlight': qIndex.isSelectedIndex === true}">
+                <div class="indexItems" [ngClass]="{'highlight': qIndex.isSelectedIndex === true}"
+                    (click)='focusOnQuestion(qIndex.id)'>
                     {{qIndex.id}}
                 </div>
             </div>

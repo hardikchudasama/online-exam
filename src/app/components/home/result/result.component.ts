@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
+  @ViewChildren("qlable") qlable: QueryList<ElementRef>;
+
   questions: any = [];
   totalQuestons: number;
   answeredQuestions: any = [];
@@ -52,5 +54,11 @@ export class ResultComponent implements OnInit {
         return answerData[i].option;
       }
     }
+  }
+
+  focusOnQuestion(questonId) {
+    const questionIndex = this.questionsindexData.findIndex(x => x.id === questonId);
+    const elementRef = this.qlable.find((item, index) => index === questionIndex);
+    elementRef.nativeElement.focus();
   }
 }

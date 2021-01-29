@@ -1,9 +1,6 @@
-import { JsonPipe } from '@angular/common';
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-start-test',
@@ -11,7 +8,7 @@ import { element } from 'protractor';
   styleUrls: ['./start-test.component.scss']
 })
 export class StartTestComponent implements OnInit {
-  @ViewChildren('formRow') rows: ElementRef;
+  @ViewChildren("qlable") qlable: QueryList<ElementRef>;
 
   examForm: FormGroup;
   questionsindexData: any = [{
@@ -485,6 +482,12 @@ export class StartTestComponent implements OnInit {
   clearAnswer(questionData) {
     return [questionData.answers.map(qdata => qdata.isSelected === true ? qdata.isSelected = false : qdata.isSelected = false),
     this.questionsindexData.filter(data => (data.id === questionData.qId && data.isSelectedIndex === true) ? data.isSelectedIndex = false : '')];
+  }
+
+  focusOnQuestion(questonId) {
+    const questionIndex = this.questionsindexData.findIndex(x => x.id === questonId);
+    const elementRef = this.qlable.find((item, index) => index === questionIndex);
+    elementRef.nativeElement.focus();
   }
 
 }
